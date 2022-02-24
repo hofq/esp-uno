@@ -20,13 +20,9 @@ void loop() {
 
   digitalWrite(G, LOW);
   delay(1000);
-  digitalWrite(G, HIGH);
-  digitalWrite(G, LOW);
   digitalWrite(R, LOW);
   delay(1000); 
   digitalWrite(G, HIGH);
-  digitalWrite(R, HIGH);
-  digitalWrite(R, LOW);
   delay(1000);
   digitalWrite(R, HIGH);
   delay(1000);
