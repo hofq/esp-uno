@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 118.3,
+      "left": 263.09,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -39.69,
+      "left": 159.84,
+      "attrs": { "value": "10000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "r1:1", "esp:D5", "black", [ "v0" ] ],
+    [ "esp:3V3", "btn1:2.l", "green", [ "v0" ] ],
+    [ "btn1:1.l", "esp:D5", "green", [ "h0" ] ],
+    [ "r1:2", "esp:GND.1", "black", [ "v0" ] ]
+  ]
+}
