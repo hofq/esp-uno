@@ -18,7 +18,12 @@ void loop() {
 btnstate = digitalRead(btn);
 if (btnstate == 1) {
   Serial.println("Button is Pressed.");
-  digitalWrite(LED_BUILTIN, HIGH);
+
+  if (digitalRead(LED_BUILTIN) == 1) {
+    digitalWrite(LED_BUILTIN, LOW);
+  } else {
+    digitalWrite(LED_BUILTIN, HIGH);
+  }
 } else {
   digitalWrite(LED_BUILTIN, LOW);
 }
