@@ -47,14 +47,9 @@ void loop(){
     delay(500);
   }
 
-  delay(3000);
-  // clears the display to print new message
-  lcd.clear();
-  // set cursor to fifth column, second row
+  delay(1000);
   lcd.setCursor(4,1);
   lcd.print("Hello World!");
-  delay(3000);
-  lcd.clear(); 
 
 
   
