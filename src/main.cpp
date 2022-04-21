@@ -26,11 +26,12 @@ void setup(){
   // turn on LCD backlight                      
   lcd.backlight();     // ohne Huntergrundbeleuchtung lcd.noBacklight();
   // lcd.setBacklight(dimvalue); dimvalue 0-255 allerdings mit I2C-Hardware ohne Dimmfunktion, dimvalue=0 (BL off) dimvalue<>0 (BL on)
-}
-
+} 
 void loop(){
+  lcd.backlight();
+  lcd.clear();
   lcd.cursor();
-  lcd.blink();
+  // lcd.blink();
   // set cursor to first column, first row
   lcd.setCursor(0, 0);
   // print message
@@ -47,10 +48,7 @@ void loop(){
     delay(500);
   }
 
-  delay(1000);
-  lcd.setCursor(4,1);
-  lcd.print("Hello World!");
-
-
-  
+  lcd.setCursor(0,1);
+  lcd.print("Line 2 Here!");
+  delay(5000);
 }
