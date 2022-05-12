@@ -1,33 +1,46 @@
+/*********
+  Rui Santos
+  Complete project details at https://randomnerdtutorials.com/esp32-esp8266-i2c-lcd-arduino-ide/
+*********/
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
-int lcdColumns = 16;
-int lcdRows = 2;
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
+#include <Wire.h>
 
-void setup(){
-  // initialize LCD
-  lcd.init();
-  // turn on LCD backlight                      
-  lcd.backlight();     // ohne Huntergrundbeleuchtung lcd.noBacklight();
-  // lcd.setBacklight(dimvalue); dimvalue 0-255 allerdings mit I2C-Hardware ohne Dimmfunktion, dimvalue=0 (BL off) dimvalue<>0 (BL on)
-  lcd.print("Aktuelle Zahl:");
+ 
+void setup() {
+  Wire.begin();
+  Serial.begin(115200);
+  Serial.println("\nI2C Scanner");
 }
-
+ 
 void loop() {
-  lcd.setCursor(15, 0);
-  int zahl = random(1, 7);
-  lcd.print(zahl);
-
-  delay(2000);
-
-  for(int i = 0; i < 10; i++) {
-  lcd.setCursor(7, 1);
-  lcd.print(".");
-  delay(500);
-  lcd.setCursor(7, 1);
-  lcd.print(" ");
-  delay(500);
+  byte error, address;
+  int nDevices;
+  Serial.println("Scanning...");
+  nDevices = 0;
+  for(address = 1; address < 127; address++ ) {
+    Wire.beginTransmission(address);
+    error = Wire.endTransmission();
+    if (error == 0) {
+      Serial.print("I2C device found at address 0x");
+      if (address<16) {
+        Serial.print("0");
+      }
+      Serial.println(address,HEX);
+      nDevices++;
+    }
+    else if (error==4) {
+      Serial.print("Unknow error at address 0x");
+      if (address<16) {
+        Serial.print("0");
+      }
+      Serial.println(address,HEX);
+    }    
   }
-  
-  // put your main code here, to run repeatedly:
+  if (nDevices == 0) {
+    Serial.println("No I2C devices found\n");
+  }
+  else {
+    Serial.println("done\n");
+  }
+  delay(5000);          
 }
